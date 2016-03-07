@@ -1,0 +1,69 @@
+1. Install jdk and eclipse
+2. create a java project in eclipse called SpringTest
+3. create a folder  lib under SpringTest\lib
+4. Download commonLoggin1.2.jar from here http://commons.apache.org/proper/commons-logging/download_logging.cgi
+
+5. extract it and put jars into lib folder earlier created.
+6. Download spring from here
+http://repo.spring.io/release/org/springframework/spring/4.1.6.RELEASE/
+7. extract it and put all jars into lib folder .
+8. Right click on SpringTest ->properties->java buid path
+9. click on add external   jar and add all jars under lib folder
+10.  Create a  folder called configFiles under SpringTest/ src folder.
+11. create a beans.xml file in configFiles
+
+Add fillowing lines
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+   <bean id="helloWorld" class="com.example.HelloWorld">
+       <property name="greet" value="Hello World! Welcome to Spring"/>
+   </bean>
+
+</beans>
+
+12 Create a package com.example under
+SpringTest\src
+
+13. create a java file HelloWorld.java under the package
+com.example
+
+14. Write following in HelloWorld
+
+
+package com.example;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class HelloWorld {
+   
+    private String greet;
+
+    public String getGreet() {
+        return greet;
+    }
+
+    public void setGreet(String greet) {
+        this.greet = greet;
+    }
+   
+   
+    public static void main(String[] args) {
+       
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("configFiles/beans.xml");
+       
+        HelloWorld bean =(HelloWorld) ctx.getBean("helloWorld");
+        System.out.println(bean.getGreet());
+       
+       
+    }
+    }
+    
+    15. Run as java application output will be
+Hello World! Welcome to Spring
